@@ -24,12 +24,12 @@ public class LoginControl {
 		if(accountNumber!=-1){
 			acct = new Account(accountDatabase.getRecord(accountNumber));
 		}else{
-			if(type!="Anonymous"){
+			if(!type.equals("Anonymous")){
 			boundary.displayLoginError();
 			}
 		}
 		
-		if(type=="Anonymous"){
+		if(type.equals("Anonymous")){
 			boundary.openHomepage("Anonymous", acct);
 		}
 		
