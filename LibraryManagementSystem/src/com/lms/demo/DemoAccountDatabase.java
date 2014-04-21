@@ -3,8 +3,11 @@ package com.lms.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lms.Account;
-import com.lms.DatabaseInterface;
+
+
+
+import com.lms.databaseinterfaces.DatabaseInterface;
+import com.lms.entity.Account;
 
 public class DemoAccountDatabase implements DatabaseInterface{
 	//This class simulates a database and will be used for the demo only.

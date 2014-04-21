@@ -1,9 +1,10 @@
-package com.lms;
+package com.lms.entity;
 
 public class Account {
 
 	String name;
 	String password;
+	String address;
 	String type;
 		
 	public Account(String name, String password, String type){

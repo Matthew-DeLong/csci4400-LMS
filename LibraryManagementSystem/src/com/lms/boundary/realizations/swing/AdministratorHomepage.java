@@ -2,9 +2,12 @@ package com.lms.boundary.realizations.swing;
 
 import java.awt.Container;
 
-import com.lms.Account;
+
 import com.lms.LMS;
+import com.lms.entity.AdminAccount;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -13,7 +16,7 @@ public class AdministratorHomepage extends Container{
 	private static final long serialVersionUID = 1L;
 	private LMS frameRef;
 
-	public AdministratorHomepage(LMS lms, Account acct){
+	public AdministratorHomepage(LMS lms, AdminAccount acct){
 		frameRef = lms;		
 		setSize(800, 600);
 		

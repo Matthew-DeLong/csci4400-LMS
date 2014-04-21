@@ -20,6 +20,7 @@ public class LMS extends JFrame{
 		setSize(800,600);
 		setContentPane(new Login(this));
 		setVisible(true);
+		setResizable(false);
 	}
 
 	

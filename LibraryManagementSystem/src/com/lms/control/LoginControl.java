@@ -1,10 +1,14 @@
 package com.lms.control;
 
-import com.lms.Account;
-import com.lms.DatabaseInterface;
+
 import com.lms.LMS;
 import com.lms.boundary.abstractions.LoginBoundaryAbstraction;
+import com.lms.databaseinterfaces.DatabaseInterface;
 import com.lms.demo.DemoAccountDatabase;
+import com.lms.entity.Account;
+import com.lms.entity.AdminAccount;
+import com.lms.entity.LibrarianAccount;
+import com.lms.entity.MemberAccount;
 
 public class LoginControl {
 	
@@ -19,45 +23,37 @@ public class LoginControl {
 	
 	
 	public void login(String username, String password, String type){
-		Account acct = null;
-		int accountNumber = accountDatabase.getRecordNumber(username);
-		if(accountNumber!=-1){
-			acct = new Account(accountDatabase.getRecord(accountNumber));
-		}else{
-			if(!type.equals("Anonymous")){
-			boundary.displayLoginError();
-			}
-		}
-		
-		if(type.equals("Anonymous")){
-			boundary.openHomepage("Anonymous", acct);
-		}
-		
-		if(acct!=null && accountMatchesInput(acct, username, password, type)){
-			switch(acct.getType()){
-				case "Member":
-					boundary.openHomepage("Member", acct);
-					break;
-				case "Librarian":
-					boundary.openHomepage("Librarian", acct);
-					break;
-				case "Administrator":
-					boundary.openHomepage("Administrator", acct);
-					break;
-			}
+		switch(type){
+			case "Member":
+				MemberAccount mAcct = MemberAccount.getAccount(username, password);
+				if(mAcct != null){
+					boundary.openMemeberHomepage(mAcct);
+				}else{
+					boundary.displayLoginError();
+				}
+				break;
+			case "Librarian":
+				LibrarianAccount lAcct = LibrarianAccount.getAccount(username, password);
+				if(lAcct != null){
+					boundary.openLibrarainHomepage(lAcct);
+				}else{
+					boundary.displayLoginError();
+				}
+				break;
+			case "Administrator":
+				AdminAccount aAcct = AdminAccount.getAccount(username, password);
+				if(aAcct != null){
+					boundary.openAdminHomepage(aAcct);
+				}else{
+					boundary.displayLoginError();
+				}
+				break;
+			case "Anonymous":
+				boundary.openAnonymousHomepage();
+				break;
 		}
 		
 	}
 	
-	private boolean accountMatchesInput(Account acct, String username, String password, String type){
-		if(username.equals(acct.getName()) && password.equals(acct.getPassword()) && type.equals(acct.getType())){
-			return true;
-		}else{
-			boundary.displayLoginError();
-			return false;
-		}
-	}
-	
-
 
 }

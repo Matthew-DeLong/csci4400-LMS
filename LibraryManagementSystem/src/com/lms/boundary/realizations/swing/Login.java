@@ -8,10 +8,15 @@ import java.beans.PropertyVetoException;
 import javax.sound.sampled.Control;
 import javax.swing.JLabel;
 
-import com.lms.Account;
+
+
 import com.lms.LMS;
 import com.lms.boundary.abstractions.LoginBoundaryAbstraction;
 import com.lms.control.LoginControl;
+import com.lms.entity.Account;
+import com.lms.entity.AdminAccount;
+import com.lms.entity.LibrarianAccount;
+import com.lms.entity.MemberAccount;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -113,25 +118,6 @@ public class Login extends Container implements LoginBoundaryAbstraction, Action
 		
 	}
 	
-	@Override
-	public void openHomepage(String type, Account acct) {
-		switch(type){
-			case "Administrator":
-				frameRef.setContentPane(new AdministratorHomepage(frameRef, acct));
-				break;
-			case "Librarian":
-				frameRef.setContentPane(new LibrarianHomepage(frameRef, acct));
-				break;
-			case "Member":
-				frameRef.setContentPane(new MemberHomepage(frameRef, acct));
-				break;
-			case "Anonymous":
-				frameRef.setContentPane(new AnonymousHomepage(frameRef));
-				break;
-				
-		}
-		
-	}
 	
 	@Override
 	public void internalFrameActivated(InternalFrameEvent arg0) {
@@ -166,6 +152,26 @@ public class Login extends Container implements LoginBoundaryAbstraction, Action
 	@Override
 	public void internalFrameOpened(InternalFrameEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void openAdminHomepage(AdminAccount acct) {
+		frameRef.setContentPane(new AdministratorHomepage(frameRef, acct));
+		
+	}
+	@Override
+	public void openLibrarainHomepage(LibrarianAccount acct) {
+		frameRef.setContentPane(new LibrarianHomepage(frameRef, acct));
+		
+	}
+	@Override
+	public void openMemeberHomepage(MemberAccount acct) {
+		frameRef.setContentPane(new MemberHomepage(frameRef, acct));
+		
+	}
+	@Override
+	public void openAnonymousHomepage() {
+		frameRef.setContentPane(new AnonymousHomepage(frameRef));
 		
 	}
 }

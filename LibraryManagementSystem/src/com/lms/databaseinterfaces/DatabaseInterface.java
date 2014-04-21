@@ -1,4 +1,4 @@
-package com.lms;
+package com.lms.databaseinterfaces;
 
 public interface DatabaseInterface {
 	

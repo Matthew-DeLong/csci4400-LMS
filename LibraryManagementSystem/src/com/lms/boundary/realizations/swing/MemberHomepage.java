@@ -4,8 +4,13 @@ import java.awt.Container;
 
 import javax.swing.JLabel;
 
-import com.lms.Account;
+
+
 import com.lms.LMS;
+import com.lms.entity.Account;
+
+import javax.swing.JMenuBar;
+import javax.swing.JButton;
 
 public class MemberHomepage extends Container{
 
@@ -23,5 +28,4 @@ public class MemberHomepage extends Container{
 		add(welcomeLabel);
 	
 	}
-
 }

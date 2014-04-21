@@ -4,7 +4,7 @@ import java.awt.Container;
 
 import javax.swing.JLabel;
 
-import com.lms.Account;
+
 import com.lms.LMS;
 
 public class AnonymousHomepage extends Container{
