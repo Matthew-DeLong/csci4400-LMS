@@ -34,7 +34,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JToggleButton;
 import java.awt.CardLayout;
 import java.awt.Panel;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import javax.swing.border.BevelBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -43,9 +42,9 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 
 	private static final long serialVersionUID = 1L;
 	private LMS frameRef;
-	JMenuItem mntmLogOut;
+	JMenuItem logOut, addItem, addBook;
 	JPanel panel;
-	
+	CardLayout contentPanelLayout;
 	
 	public LibrarianHomepage(LMS lms, LibrarianAccount acct){
 		frameRef = lms;		
@@ -62,17 +61,22 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		JMenu mnNewMenu = new JMenu("Collection Management");
 		mnLibrarianActions.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("View All Items");
-		mnNewMenu.add(mntmNewMenuItem);
+		JMenuItem viewAllItems = new JMenuItem("View All Items");
+		mnNewMenu.add(viewAllItems);
 		
-		JMenuItem mntmRemove = new JMenuItem("Remove");
-		mnNewMenu.add(mntmRemove);
+		JMenuItem removeItem = new JMenuItem("Remove");
+		mnNewMenu.add(removeItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Add");
-		mnNewMenu.add(mntmNewMenuItem_1);
+		JMenu mnNewMenu_1 = new JMenu("Add");
+		mnNewMenu.add(mnNewMenu_1);
 		
-		JMenuItem mntmUpdate = new JMenuItem("Update");
-		mnNewMenu.add(mntmUpdate);
+		addBook = new JMenuItem("Book");
+		addBook.addActionListener(this);
+		mnNewMenu_1.add(addBook);
+		
+		addItem = new JMenuItem("Other");
+		addItem.addActionListener(this);
+		mnNewMenu_1.add(addItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Borrowed Items Management");
 		mnLibrarianActions.add(mntmNewMenuItem_2);
@@ -83,18 +87,21 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		JMenu mnAccountActions = new JMenu("Account Actions");
 		menuBar.add(mnAccountActions);
 		
-		mntmLogOut = new JMenuItem("Log Out");
-		mnAccountActions.add(mntmLogOut);
-		mntmLogOut.addItemListener(this);
-		mntmLogOut.addActionListener(this);
+		logOut = new JMenuItem("Log Out");
+		logOut.addActionListener(this);
+		mnAccountActions.add(logOut);
+		
 		JMenuItem mntmChangePassword = new JMenuItem("Change Password");
 		mnAccountActions.add(mntmChangePassword);
 		
 		panel = new JPanel();
 		panel.setBounds(0, 21, 800, 579);
 		add(panel);
-		panel.setLayout(new CardLayout(0, 0));
-	
+		contentPanelLayout = new CardLayout(0, 0);
+		panel.setLayout(contentPanelLayout);
+		panel.add(new AddItemPanel(), "ADD_ITEM");
+		panel.add(new AddBookPanel(), "ADD_BOOK");
+		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		
@@ -105,16 +112,21 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		System.out.print("Success");
-		if(e.getItemSelectable()==mntmLogOut){
+		if(e.getItemSelectable()==logOut){
 			System.out.print("Success");
 		}
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==mntmLogOut){
+		if(e.getSource()==logOut){
 			frameRef.setContentPane(new Login(frameRef));
 		}
-		
+		if(e.getSource()==addBook){
+			contentPanelLayout.show(panel, "ADD_BOOK");
+		}
+		if(e.getSource()==addItem){
+			contentPanelLayout.show(panel, "ADD_ITEM");
+		}
 	}
 }

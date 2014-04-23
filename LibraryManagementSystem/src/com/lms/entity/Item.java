@@ -7,4 +7,21 @@ public class Item {
 	String description;
 	String dailyLateFee;
 	String maxLateFee;
+	int copies;
+	int copiesAvaliable;
+	
+	public Item(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	private class Copy{
+		
+	}
+	
 }

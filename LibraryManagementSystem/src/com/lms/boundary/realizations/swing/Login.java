@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 
 
+
 import com.lms.LMS;
 import com.lms.boundary.abstractions.LoginBoundaryAbstraction;
 import com.lms.control.LoginControl;
@@ -18,6 +19,7 @@ import com.lms.entity.AdminAccount;
 import com.lms.entity.LibrarianAccount;
 import com.lms.entity.MemberAccount;
 
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -68,7 +70,7 @@ public class Login extends Container implements LoginBoundaryAbstraction, Action
 		lblHelloPanes.setBounds(31, 26, 372, 14);
 		add(lblHelloPanes);
 		
-		passwordTextField = new JTextField();
+		passwordTextField = new JPasswordField();
 		passwordTextField.setBounds(325, 290, 150, 20);
 		add(passwordTextField);
 		passwordTextField.setColumns(10);
