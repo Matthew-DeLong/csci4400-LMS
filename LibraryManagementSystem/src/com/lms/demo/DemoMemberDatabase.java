@@ -11,7 +11,7 @@ public class DemoMemberDatabase implements MemberDatabaseInterface{
 	
 	public DemoMemberDatabase(){
 		demoDatabase = new LinkedList<MemberAccount>();
-		demoDatabase.add(new MemberAccount("JohnQPublic", "hisbirthday"));
+		demoDatabase.add(new MemberAccount("JohnQPublic", "hisbirthday", "5213 Road Lane"));
 	}
 
 	@Override
@@ -24,6 +24,46 @@ public class DemoMemberDatabase implements MemberDatabaseInterface{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public MemberAccount getAccount(String name) {
+		for(MemberAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				return acct;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void removeAccount(String name) {
+		for(MemberAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				demoDatabase.remove(acct);
+			}
+		}		
+	}
+
+	@Override
+	public void addAccount(String name, String password, String address) {
+		demoDatabase.add(new MemberAccount(name, password, address));
+	}
+
+	@Override
+	public boolean accountExists(String name) {
+		boolean accountFound = false;
+		for(MemberAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				accountFound = true;
+			}
+		}
+		return accountFound;
+	}
+
+	@Override
+	public LinkedList<MemberAccount> getAllAccounts() {
+		return demoDatabase;
 	}
 
 }

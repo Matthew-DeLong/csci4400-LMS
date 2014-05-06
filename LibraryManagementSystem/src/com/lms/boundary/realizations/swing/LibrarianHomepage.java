@@ -42,12 +42,14 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 
 	private static final long serialVersionUID = 1L;
 	private LMS frameRef;
-	JMenuItem logOut, addItem, addBook;
+	JMenuItem logOut, addItem, addBook, manageItems, manageBooks, checkOutItem, checkOutBook, returnItem, returnBook;
 	JPanel panel;
 	CardLayout contentPanelLayout;
+	private JMenu mnNewMenu_3;
 	
 	public LibrarianHomepage(LMS lms, LibrarianAccount acct){
-		frameRef = lms;		
+		frameRef = lms;	
+		frameRef.setTitle("Librarian Homepage");
 		setSize(800, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -61,11 +63,13 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		JMenu mnNewMenu = new JMenu("Collection Management");
 		mnLibrarianActions.add(mnNewMenu);
 		
-		JMenuItem viewAllItems = new JMenuItem("View All Items");
-		mnNewMenu.add(viewAllItems);
+		manageItems = new JMenuItem("Manage Items");
+		manageItems.addActionListener(this);
+		mnNewMenu.add(manageItems);
 		
-		JMenuItem removeItem = new JMenuItem("Remove");
-		mnNewMenu.add(removeItem);
+		manageBooks = new JMenuItem("Manage Books");
+		manageBooks.addActionListener(this);
+		mnNewMenu.add(manageBooks);
 		
 		JMenu mnNewMenu_1 = new JMenu("Add");
 		mnNewMenu.add(mnNewMenu_1);
@@ -74,15 +78,31 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		addBook.addActionListener(this);
 		mnNewMenu_1.add(addBook);
 		
-		addItem = new JMenuItem("Other");
+		addItem = new JMenuItem("Item");
 		addItem.addActionListener(this);
 		mnNewMenu_1.add(addItem);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Borrowed Items Management");
-		mnLibrarianActions.add(mntmNewMenuItem_2);
+		JMenu mnNewMenu_2 = new JMenu("Check Out");
+		mnLibrarianActions.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Check Out");
-		mnLibrarianActions.add(mntmNewMenuItem_3);
+		checkOutBook = new JMenuItem("Book");
+		checkOutBook.addActionListener(this);
+		mnNewMenu_2.add(checkOutBook);
+		
+		checkOutItem = new JMenuItem("Item");
+		checkOutItem.addActionListener(this);
+		mnNewMenu_2.add(checkOutItem);
+		
+		mnNewMenu_3 = new JMenu("Return");
+		mnLibrarianActions.add(mnNewMenu_3);
+		
+		returnBook = new JMenuItem("Book");
+		returnBook.addActionListener(this);
+		mnNewMenu_3.add(returnBook);
+		
+		returnItem = new JMenuItem("Item");
+		returnItem.addActionListener(this);
+		mnNewMenu_3.add(returnItem);
 		
 		JMenu mnAccountActions = new JMenu("Account Actions");
 		menuBar.add(mnAccountActions);
@@ -101,7 +121,12 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		panel.setLayout(contentPanelLayout);
 		panel.add(new AddItemPanel(), "ADD_ITEM");
 		panel.add(new AddBookPanel(), "ADD_BOOK");
-		
+		panel.add(new LibrarianItemManagementPanel(), "MANAGE_ITEMS");
+		panel.add(new LibrarianBookManagementPanel(), "MANAGE_BOOKS");
+		panel.add(new LibrarianCheckOutItemPanel(), "ITEM_CHECKOUT");
+		panel.add(new LibrarianCheckOutBookPanel(), "BOOK_CHECKOUT");
+		panel.add(new LibrarianReturnItemPanel(), "ITEM_RETURN");
+		panel.add(new LibrarianReturnBookPanel(), "BOOK_RETURN");
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		
@@ -127,6 +152,24 @@ public class LibrarianHomepage extends Container implements ItemListener, Action
 		}
 		if(e.getSource()==addItem){
 			contentPanelLayout.show(panel, "ADD_ITEM");
+		}
+		if(e.getSource() == manageItems){
+			contentPanelLayout.show(panel, "MANAGE_ITEMS");
+		}
+		if(e.getSource() == manageBooks){
+			contentPanelLayout.show(panel, "MANAGE_BOOKS");
+		}
+		if(e.getSource() == checkOutItem){
+			contentPanelLayout.show(panel, "ITEM_CHECKOUT");
+		}
+		if(e.getSource() == checkOutBook){
+			contentPanelLayout.show(panel, "BOOK_CHECKOUT");
+		}
+		if(e.getSource() == returnItem){
+			contentPanelLayout.show(panel, "ITEM_RETURN");
+		}
+		if(e.getSource() == returnBook){
+			contentPanelLayout.show(panel, "BOOK_RETURN");
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import com.lms.databaseinterfaces.LibrarianDatabaseInterface;
 import com.lms.entity.LibrarianAccount;
+import com.lms.entity.MemberAccount;
 
 public class DemoLibrarianDatabase implements LibrarianDatabaseInterface{
 	
@@ -24,6 +25,46 @@ public class DemoLibrarianDatabase implements LibrarianDatabaseInterface{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public LibrarianAccount getAccount(String name) {
+		for(LibrarianAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				return acct;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void addAccount(String name, String pass) {
+		demoDatabase.add(new LibrarianAccount(name, pass));
+	}
+
+	@Override
+	public void removeAccount(String name) {
+		for(LibrarianAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				demoDatabase.remove(acct);
+			}
+		}	
+	}
+
+	@Override
+	public LinkedList<LibrarianAccount> getAllAccounts() {
+		return demoDatabase;
+	}
+
+	@Override
+	public Boolean accountExists(String name) {
+		boolean accountFound = false;
+		for(LibrarianAccount acct: demoDatabase){
+			if(acct.getName().equals(name)){
+				accountFound = true;
+			}
+		}
+		return accountFound;
 	}
 
 }

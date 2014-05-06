@@ -4,7 +4,6 @@ package com.lms.control;
 import com.lms.LMS;
 import com.lms.boundary.abstractions.LoginBoundaryAbstraction;
 import com.lms.databaseinterfaces.DatabaseInterface;
-import com.lms.demo.DemoAccountDatabase;
 import com.lms.entity.Account;
 import com.lms.entity.AdminAccount;
 import com.lms.entity.LibrarianAccount;
@@ -13,11 +12,9 @@ import com.lms.entity.MemberAccount;
 public class LoginControl {
 	
 	LoginBoundaryAbstraction boundary;
-	DatabaseInterface accountDatabase;
 	
 	public LoginControl(LoginBoundaryAbstraction lba){
 		boundary=lba;
-		accountDatabase = new DemoAccountDatabase();
 		
 	}
 	
