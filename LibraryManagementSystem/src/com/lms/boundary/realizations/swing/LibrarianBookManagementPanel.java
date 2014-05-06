@@ -154,8 +154,18 @@ public class LibrarianBookManagementPanel extends JPanel implements ItemDisplaye
 			clearResults();
 			break;
 		case "overdue":
+			CardLayout layout111 = (CardLayout) this.getParent().getLayout();
+			String name111 = (String) table.getModel().getValueAt(table.getSelectedRow(), 0);
+			this.getParent().add(new LibrarianViewOverdueCopiesPanel(name111), "View Overdue");
+			layout111.show(this.getParent(), "View Overdue");
+			clearResults();
 			break;
 		case "reservations":
+			CardLayout layout11 = (CardLayout) this.getParent().getLayout();
+			String name11 = (String) table.getModel().getValueAt(table.getSelectedRow(), 0);
+			this.getParent().add(new LibrarianViewItemReservationListPanel(name11), "View Reservations");
+			layout11.show(this.getParent(), "View Reservations");
+			clearResults();
 			break;
 		}		
 	}

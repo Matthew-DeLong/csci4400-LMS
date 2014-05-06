@@ -214,6 +214,12 @@ public class Item {
 			return item;
 		}
 		
+		public float getFees(){
+			float fees = this.getDaysLate() *  item.getDailyLateFee();
+			return Math.min(item.getMaxLateFee(), fees);
+			
+		}
+		
 		public LocalDate getDueDate(){
 			return dueDate;
 		}

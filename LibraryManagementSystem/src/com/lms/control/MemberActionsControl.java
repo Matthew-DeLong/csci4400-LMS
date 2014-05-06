@@ -132,5 +132,15 @@ public class MemberActionsControl {
 			}
 		}
 	}
+	
+	public static float getFees(String username){
+		MemberAccount acct = MemberAccount.getAccount(username);
+		return acct.getFeesOwed();
+	}
+	
+	public static void payFees(String username){
+		MemberAccount acct = MemberAccount.getAccount(username);
+		acct.setFeesOwed(0);;
+	}
 
 }

@@ -13,7 +13,10 @@ public class DemoBookDatabase implements BookDatabaseInterface{
 	public DemoBookDatabase(){
 		books = new LinkedList<Book>();
 		books.add(new Book("12345", "A -- GENERAL WORKS", "Cranberries of Vengence", "Bob Dole", 1.5f, 10, 3));
-		books.add(new Book("6789", "T -- TECHNOLOGY", "How to Fight a Velaciraptor", "Bob Dole", 1.5f, 10, 3));
+		books.add(new Book("6789", "T -- TECHNOLOGY", "How to Fight a Velociraptor", "Bob Dole", 1.5f, 10, 3));
+		books.add(new Book("5555", "H -- SOCIAL SCIENCES", "Life on the Street", "Elmo", 2, 10, 3));
+		books.add(new Book("99894", "T -- TECHNOLOGY", "Rarararrrrrah", "Chewbacca", 1.5f, 10, 2));
+		books.add(new Book("4681588", "N -- FINE ARTS", "Hodor", "Hodor", 100, 1000, 1));
 	}
 
 	@Override

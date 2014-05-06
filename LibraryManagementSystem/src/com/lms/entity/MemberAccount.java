@@ -15,6 +15,8 @@ public class MemberAccount extends Account{
 	LinkedList<Book> reservedBooks;
 	int feesOwed;
 	
+
+
 	static int maxNumberOfItems = 3;
 	static MemberDatabaseInterface database;
 
@@ -67,6 +69,18 @@ public class MemberAccount extends Account{
 
 	public void setReservedItems(LinkedList<Item> reservedItems) {
 		this.reservedItems = reservedItems;
+	}
+	
+	public int getFeesOwed() {
+		return feesOwed;
+	}
+
+	public void setFeesOwed(int feesOwed) {
+		this.feesOwed = feesOwed;
+	}
+	
+	public void addFees(int feesOwed) {
+		this.feesOwed+=feesOwed;
 	}
 
 	public boolean numberOfBorrowedItemsMaxed(){
@@ -128,6 +142,7 @@ public class MemberAccount extends Account{
 			if(borrowed.getItem() == item){
 				itemsBorrowed.remove(borrowed);
 				borrowed.getItem().returnCopy(borrowed);
+				feesOwed+=borrowed.getFees();
 			}
 		}		
 		
@@ -144,6 +159,7 @@ public class MemberAccount extends Account{
 			if(borrowed.getItem() == item){
 				booksBorrowed.remove(borrowed);
 				borrowed.getItem().returnCopy(borrowed);
+				feesOwed+=borrowed.getFees();
 			}
 		}		
 		

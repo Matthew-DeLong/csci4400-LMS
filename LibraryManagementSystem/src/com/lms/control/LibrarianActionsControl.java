@@ -147,6 +147,19 @@ public class LibrarianActionsControl {
 		return list;
 	}
 	
+	public static String[][] getItemReservationList(String name){
+		Item item = Book.getBook(name);
+		LinkedList<String> reservations = item.getReservationList();
+		String[][] list = new String[reservations.size()][2];
+		int counter = 0;
+		for(String memberName: reservations){
+			list[counter][0] = Integer.toString(counter+1);
+			list[counter][1] = reservations.get(counter);
+			counter++;
+		}
+		return list;
+	}
+	
 	public static String[][] getOverdueCopiesofItem(String name, String category){
 		Item item = Item.getItem(name, category);
 		LinkedList<Copy> overdueCopies = item.getOverdueCopies();
@@ -163,6 +176,24 @@ public class LibrarianActionsControl {
 		
 		return list;	
 	}
+	
+	public static String[][] getOverdueCopiesofItem(String name){
+		Item item = Book.getBook(name);
+		LinkedList<Copy> overdueCopies = item.getOverdueCopies();
+		String [][] list = new String[overdueCopies.size()][3];
+		System.out.println(item.getDailyLateFee());
+		System.out.println(item.getMaxLateFee());
+		int counter = 0;
+		for(Copy copy: overdueCopies){
+			list[counter][0] = copy.getBorrower();
+			list[counter][1] = Integer.toString(copy.getDaysLate());
+			list[counter][2] = Float.toString(Math.min(item.getMaxLateFee(), copy.getDaysLate()*item.getDailyLateFee()));
+			counter++;
+		}
+		
+		return list;	
+	}
+	
 	
 	public static void checkOutItem(Messagable ui, String name, String category, String username){
 		boolean itemCheckedOut = true;

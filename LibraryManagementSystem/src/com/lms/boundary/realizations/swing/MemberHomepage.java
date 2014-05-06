@@ -93,7 +93,7 @@ public class MemberHomepage extends Container implements ActionListener{
 		panel.add(new MemberSearchBooksPanel(acct.getName()), "searchBooks");
 		panel.add(new MemberViewReservedBooksPanel(acct.getName()), "reservedBooks");
 		panel.add(new MemberViewReservedItemsPanel(acct.getName()), "reservedItems");
-		//panel.add(new MemberViewLateFeesPanel(acct.getName()), "latefees");
+		panel.add(new MemberViewLateFeesPanel(acct.getName()), "payFees");
 	}
 
 
@@ -119,6 +119,9 @@ public class MemberHomepage extends Container implements ActionListener{
 		}
 		if(e.getSource() == reservedItems){
 			contentPanelLayout.show(panel, "reservedItems");
+		}
+		if(e.getSource() == payFees){
+			contentPanelLayout.show(panel, "payFees");
 		}
 	}
 }

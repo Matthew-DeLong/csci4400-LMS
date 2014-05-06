@@ -20,13 +20,15 @@ public class LibrarianViewOverdueCopiesPanel extends JPanel implements ActionLis
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-
+	String type;
 	/**
 	 * Create the panel.
 	 */
 	public LibrarianViewOverdueCopiesPanel(String name, String category) {
 		setSize(800,579);
 		setLayout(null);
+		
+		type = "MANAGE_ITEMS";
 		
 		JLabel lblNewLabel = new JLabel("Overdue Copies of:");
 		lblNewLabel.setBounds(10, 11, 199, 14);
@@ -75,13 +77,60 @@ public class LibrarianViewOverdueCopiesPanel extends JPanel implements ActionLis
 		add(returnButton);
 
 	}
+	
+	public LibrarianViewOverdueCopiesPanel(String name) {
+		setSize(800,579);
+		setLayout(null);
+		
+		type = "MANAGE_BOOKS";
+		
+		JLabel lblNewLabel = new JLabel("Overdue Copies of:");
+		lblNewLabel.setBounds(10, 11, 199, 14);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("ISBN: ");
+		lblNewLabel_1.setBounds(10, 36, 46, 14);
+		add(lblNewLabel_1);
+		
+		JLabel nameLabel = new JLabel(name);
+		nameLabel.setBounds(66, 36, 365, 14);
+		add(nameLabel);
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 86, 780, 374);
+		add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			LibrarianActionsControl.getOverdueCopiesofItem(name),
+			new String[] {
+				"Name of Member", "Days Overdue", "Fees Accumulated"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(table);
+		
+		JButton returnButton = new JButton("Return");
+		returnButton.addActionListener(this);
+		returnButton.setActionCommand("return");
+		returnButton.setBounds(10, 471, 122, 23);
+		add(returnButton);
+
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
 		case "return":
 			CardLayout layout = (CardLayout) this.getParent().getLayout();
-			layout.show(this.getParent(), "MANAGE_ITEMS");
+			layout.show(this.getParent(), type);
 			break;
 			
 		}
